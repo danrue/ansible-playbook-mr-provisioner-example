@@ -15,9 +15,9 @@ A more advanced usecase can be found at
 1. Install ansible. Latest version is recommended (tested with 2.3).
 2. Log into your Mr. Provisioner instance and get an auth token by clicking on
    Users -> Tokens.
-3. Modify hosts file to reference a machine that is assigned to you, and give
-   its reserved IP address (IP is not yet dynamically retrieved).
-4. Modify main.yml's mr_provisioner_url and mr_provisioner_preseed_name
+3. Modify ``hosts`` file to reference a machine that is assigned to you, and
+   give its reserved IP address (IP is not yet dynamically retrieved).
+4. Modify ``main.yml``'s mr_provisioner_url and mr_provisioner_preseed_name
    according to your needs. The preseed file should already exist in Mr.
    Provisioner.
 5. Using your own auth token, run ``make AUTH_TOKEN="/XXXXXXXXXXXXXXXXXYYYYYYYYYYYYYYZZZZZZZZZZZZZZ="``
