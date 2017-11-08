@@ -1,0 +1,6 @@
+# Default username and password for each host in ../hosts
+# If a host needs a different settings, put it in ../hosts
+ansible_user: linaro
+ansible_ssh_pass: linaro
+ansible_become_pass: root
+ansible_become_method: su

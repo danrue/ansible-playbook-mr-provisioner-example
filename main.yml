@@ -1,0 +1,41 @@
+- name: Mr Provisioner Example
+  hosts: cambridge-hosts
+  gather_facts: false
+  vars:
+    mr_provisioner_url: http://172.27.80.1:5000
+    mr_provisioner_preseed_name: danrue/erp-17.08-debian-20170727.567664d4
+
+  roles:
+    # Download the latest ERP staging build
+    - role: Linaro.erp-get-build
+
+    # Provision the host(s) defined in hosts file
+    # with aforementioned build
+    - role: Linaro.mr-provisioner
+
+- name: Mr Provisioner Example
+  hosts: cambridge-hosts
+  vars:
+    ansible_become: true # Run as root
+  tasks:
+
+    # Run some tasks on the provisioned host
+    - name: Get uname -a
+      command: uname -a
+      register: uname
+    - name: Print out uname
+      debug:
+        msg: "{{uname.stdout}}"
+
+    - name: Install some packages
+      apt:
+        update_cache: yes
+        cache_valid_time: 86400
+        pkg: "{{item}}"
+      with_items:
+        - git
+        - python-pip
+        - sysstat
+        - strace
+        - sl # My personal favorite
+

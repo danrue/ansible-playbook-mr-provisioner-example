@@ -1,0 +1,4 @@
+- src: Linaro.erp-get-build
+  version: 1.3.0
+- src: Linaro.mr-provisioner
+  version: 1.0.1
