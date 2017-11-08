@@ -4,7 +4,7 @@ This is a bare bones ansible playbook that shows how to use roles
 [Linaro.erp-get-build](https://galaxy.ansible.com/Linaro/erp-get-build/)
 and
 [Linaro.mr-provisioner](https://galaxy.ansible.com/Linaro/mr-provisioner/)
-to automate host provising using [Mr.
+to automate host provisioning using [Mr.
 Provisioner](https://github.com/Linaro/mr-provisioner) and Ansible.
 
 A more advanced usecase can be found at
