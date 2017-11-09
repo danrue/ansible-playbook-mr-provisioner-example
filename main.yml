@@ -4,6 +4,9 @@
   vars:
     mr_provisioner_url: http://172.27.80.1:5000
     mr_provisioner_preseed_name: danrue/erp-17.08-debian-20170727.567664d4
+    erp_debian_installer_environment: staging # alternatively, use 'stable'
+    erp_build_number: false # Set to a build number (i.e. 505).
+                            # 'false' will discover the latest build.
 
   roles:
     # Download the latest ERP staging build
