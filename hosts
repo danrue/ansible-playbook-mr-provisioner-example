@@ -2,4 +2,4 @@
 localhost ansible_connection=local
 
 [cambridge-hosts]
-r1-m1-c34n1 ansible_host=10.101.16.36
+j12-m1-c34n1 ansible_host=10.101.16.36

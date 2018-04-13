@@ -3,25 +3,27 @@
   gather_facts: false
   vars:
     mr_provisioner_url: http://172.27.80.1:5000
-    mr_provisioner_preseed_name: danrue/erp-17.08-debian-20170727.567664d4
-    erp_debian_installer_environment: staging # alternatively, use 'stable'
+    mr_provisioner_arch: 'arm64'
+    mr_provisioner_subarch: 'efi'
+    mr_provisioner_preseed_name: 'danrue/debian-mini-install-20180413'
+    mr_provisioner_preseed_path: './preseeds/debian-mini-install-20180413'
+    mr_provisioner_preseed_public: false
+
+    erp_debian_installer_environment: stable # alternatively, use 'staging'
     erp_build_number: false # Set to a build number (i.e. 505).
                             # 'false' will discover the latest build.
 
   roles:
     # Download the latest ERP staging build
     - role: Linaro.erp-get-build
+      ansible_become: no
 
     # Provision the host(s) defined in hosts file
     # with aforementioned build
     - role: Linaro.mr-provisioner
+      ansible_become: no
 
-- name: Mr Provisioner Example
-  hosts: cambridge-hosts
-  vars:
-    ansible_become: true # Run as root
-  tasks:
-
+  post_tasks:
     # Run some tasks on the provisioned host
     - name: Get uname -a
       command: uname -a
@@ -29,6 +31,13 @@
     - name: Print out uname
       debug:
         msg: "{{uname.stdout}}"
+
+    - name: whoami
+      command: whoami
+      register: whoami
+    - name: Print out whoami
+      debug:
+        msg: "{{whoami.stdout}}"
 
     - name: Install some packages
       apt:
