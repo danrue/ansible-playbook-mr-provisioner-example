@@ -1,5 +1,5 @@
 - name: Mr Provisioner Example
-  hosts: cambridge-hosts
+  hosts: localhost
   gather_facts: false
   vars:
     mr_provisioner_url: http://172.27.80.1:5000
@@ -8,6 +8,7 @@
     mr_provisioner_preseed_name: 'danrue/debian-mini-install-20180413'
     mr_provisioner_preseed_path: './preseeds/debian-mini-install-20180413'
     mr_provisioner_preseed_public: false
+    mr_provisioner_machine_name: 'j12-m1-c34n1'
 
     erp_debian_installer_environment: stable # alternatively, use 'staging'
     erp_build_number: false # Set to a build number (i.e. 505).
@@ -23,7 +24,18 @@
     - role: Linaro.mr-provisioner
       ansible_become: no
 
-  post_tasks:
+- hosts: mr_provisioner_hosts
+  gather_facts: false
+  tasks:
+    - name: Wait for host for 3600 seconds, but only start checking after 60.
+      wait_for_connection:
+        delay: 60
+        timeout: 3600
+
+- hosts: mr_provisioner_hosts
+  gather_facts: false
+  tasks:
+
     # Run some tasks on the provisioned host
     - name: Get uname -a
       command: uname -a
